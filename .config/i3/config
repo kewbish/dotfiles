@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Consolas 10
+font pango:DejaVu Sans Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -71,8 +71,6 @@ bindsym Mod1+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym Mod1+Shift+Left move left
-bindsym Mod1+Shift+Down move down
-bindsym Mod1+Shift+Up move up
 bindsym Mod1+Shift+Right move right
 
 # split in horizontal orientation
@@ -177,6 +175,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         separator_symbol "‖"
+        colors {
+            focused_workspace  #808080 #5A5A5A #FFFFFF
+            active_workspace   #333333 #222222 #FFFFFF
+        }
 }
 
 # borders
@@ -189,3 +191,10 @@ workspace_layout tabbed
 
 # background color
 exec --no-startup-id hsetroot -solid "#1e1e1e"
+
+# colors
+client.focused          #777777 #5A5A5A #FFFFFF #777777   #777777
+client.focused_inactive #333333 #6A6A6A #FFFFFF #505050   #505050
+client.unfocused        #333333 #222222 #C9C9C9 #2E2E2E   #2e2e2e
+client.urgent           #3A3A3A #D3D3D3 #BC4848 #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C

@@ -8,7 +8,7 @@
 
 general {
         colors = true
-        interval = 5
+        interval = 10 
         color_good = "#808080"
         color_degraded = "#777777"
         color_bad = "#5A5A5A"
@@ -22,8 +22,8 @@ order += "memory"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "W (%quality at %essid) %ip"
-        format_down = "W down"
+        format_up = "CON %ip"
+        format_down = "INT DOWN"
 }
 
 battery all {
@@ -41,5 +41,5 @@ memory {
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+        format = "%d %b %Y %H:%M"
 }
