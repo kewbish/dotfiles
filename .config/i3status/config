@@ -9,17 +9,27 @@
 general {
         colors = true
         interval = 10 
-        color_good = "#808080"
-        color_degraded = "#777777"
+        color_good = "#FFFFFF"
+        color_degraded = "#FFFFFF"
         color_bad = "#5A5A5A"
         separator = "‖"
 }
 
+py3status {
+    separator = True
+}
+
+order += "external_script"
 order += "wireless _first_"
 order += "battery all"
 order += "cpu_usage"
 order += "memory"
 order += "tztime local"
+
+external_script {
+    format = "{output}"
+    script_path = "/home/kewbish/Downloads/dev/pers/statusclc/statusclc.py"
+}
 
 wireless _first_ {
         format_up = "CON %ip"
@@ -37,7 +47,7 @@ cpu_usage {
 memory {
         format = "MEM %used"
         threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
+        format_degraded = "MEM < %available"
 }
 
 tztime local {

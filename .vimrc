@@ -52,13 +52,8 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
-    \ "rg ^#+ \| sed '1d;s:^..::'",
-    \ fzf#wrap({'dir': expand('%:p:h')}))
-" sed 's/.*/\\L&/;s/[^[:alpha:] -]//g;1s/^.//g;s/[ ]/-/g'
-
 autocmd FileType markdown setlocal expandtab!
-nnoremap <leader>te :tabnew <bar> term<CR><C-w>_
+nnoremap <leader>te :let $VIM_DIR=expand('%:p:h')<CR>:tabnew <bar> term<CR><C-w>_cd $VIM_DIR<CR>clear<CR>
 nnoremap <leader>go :Goyo<CR>
 nnoremap gx vi]y:silent :!chromium <C-r>0<CR><CR><C-l>
 
