@@ -153,8 +153,9 @@ export FZF_DEFAULT_OPTS='-m --border --height 40%'
 
 alias tock='python /home/kewbish/Downloads/dev/pers/tock/tock.py'
 alias clc='calcurse'
-alias linal='chromium https://piped.kavin.rocks/watch?v=JnTa9XtvmfI http://joshua.smcvt.edu/linearalgebra/book.pdf#zoom=125 http://joshua.smcvt.edu/linearalgebra/jhanswer.pdf#zoom=125 > /dev/null'
+alias linal='chromium file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebra.pdf#zoom=125 file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebraAnswers.pdf#zoom=125 > /dev/null; vim -o "/home/kewbish/EVB/maths/Linear Algebra.md"'
 alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files $evb | fzf)";ctags -R .'
+alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
 
 shopt -s direxpand
 

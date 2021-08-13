@@ -42,13 +42,6 @@ bindsym $mod+Shift+r exec xfce4-terminal
 # kill focused window
 bindsym Mod1+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
 # change focus
 bindsym Mod1+h focus left
 bindsym Mod1+j focus down
@@ -71,12 +64,6 @@ bindsym Mod1+Shift+l move right
 bindsym Mod1+Shift+Left move left
 bindsym Mod1+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+u split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -93,9 +80,6 @@ for_window [title="Application Finder"] floating enable, resize set 500 250, mov
 
 # fix navigator issue
 for_window [window_role="(?i)GtkFileChooserDialog"] floating enable, resize set 800 500, move position center
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -204,3 +188,9 @@ client.unfocused        #333333 #222222 #C9C9C9 #2E2E2E   #2e2e2e
 client.urgent           #3A3A3A #D3D3D3 #BC4848 #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
+# scratchpad
+for_window [title="bdump"] move scratchpad 
+exec xfce4-terminal --initial-title=bdump --command='vim "/home/kewbish/EVB/tmp/Dump.md"'
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+u [title="bdump"] scratchpad show

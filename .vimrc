@@ -61,6 +61,9 @@ nnoremap <leader>qa :qa!<CR>
 let g:black_linelength=120
 let g:black_quiet=1
 autocmd BufWritePre *.py execute ':Black'
+augroup filetypedetect
+    au BufRead,BufNewFile *.sage set filetype=python
+augroup END
 
 let g:fzf_action = {
   \ 'return': 'vsplit'}
