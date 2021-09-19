@@ -153,9 +153,15 @@ export FZF_DEFAULT_OPTS='-m --border --height 40%'
 
 alias tock='python /home/kewbish/Downloads/dev/pers/tock/tock.py'
 alias clc='calcurse'
-alias linal='chromium file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebra.pdf#zoom=125 file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebraAnswers.pdf#zoom=125 > /dev/null; vim -o "/home/kewbish/EVB/maths/Linear Algebra.md"'
-alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files $evb | fzf)";ctags -R .'
-alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
+alias linal='chromium file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebra.pdf#zoom=125 file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebraAnswers.pdf#zoom=125 > /dev/null; i3-msg move right; vim -o "/home/kewbish/EVB/maths/Linear Algebra.md"'
+alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files -g '!archive/' $evb | fzf)";ctags -R .'
+alias latexmk='latexmk -pvc -pdf -interaction=nonstopmode'
+alias class='cd /home/kewbish/EVB/;vim -o "$(fd atsc113 engl110 fren101 math104 phys119 --type directory | fzf)"'
+alias atsc113='cd /home/kewbish/EVB/atsc113/;vim -o "$(fzf)"'
+alias engl110='cd /home/kewbish/EVB/engl110/;vim -o "$(fzf)"'
+alias fren101='cd /home/kewbish/EVB/fren101/;vim -o "$(fzf)"'
+alias math104='cd /home/kewbish/EVB/math104/;vim -o "$(fzf)"'
+alias phys119='cd /home/kewbish/EVB/phys119/;vim -o "$(fzf)"'
 
 shopt -s direxpand
 

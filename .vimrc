@@ -68,7 +68,7 @@ augroup END
 let g:fzf_action = {
   \ 'return': 'vsplit'}
 command! -bang -nargs=* Sevb 
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
+  \ call fzf#vim#grep("rg -g '!archive/' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
 autocmd FileType markdown setlocal noexpandtab
 nnoremap <leader>ln va)y:exe ":Sevb " . substitute(substitute(getreg('"'), "\(#:", "", "/g"), "\)", "", "/g")<CR>
 nnoremap <leader>st :silent !ctags -R . <CR>:redraw!<CR>:Tags<CR>
