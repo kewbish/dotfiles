@@ -72,7 +72,7 @@ if ${use_color} ; then
 	if [[ ${EUID} == 0 ]] ; then
 		PS1='\[\033[01;31m\][*･ﾟ✧ \h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
-		PS1='\[\033[01;32m\][*･ﾟ✧ \h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+        PS1='\[\033[01;32m\][*･ﾟ✧ \h\[\033[01;37m\]\033[37m \W\033[0m\[\033[01;32m\]]\$\[\033[00m\] '
 	fi
 
 	alias ls='ls --color=auto'
@@ -153,15 +153,28 @@ export FZF_DEFAULT_OPTS='-m --border --height 40%'
 
 alias tock='python /home/kewbish/Downloads/dev/pers/tock/tock.py'
 alias clc='calcurse'
-alias linal='chromium file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebra.pdf#zoom=125 file:///run/media/kewbish/09CA611864AA9A0F/dev/books/LinearAlgebraAnswers.pdf#zoom=125 > /dev/null; i3-msg move right; vim -o "/home/kewbish/EVB/maths/Linear Algebra.md"'
-alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files -g '!archive/' $evb | fzf)";ctags -R .'
+alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files -g '!archive/' $evb | fzf)"'
 alias latexmk='latexmk -pvc -pdf -interaction=nonstopmode'
-alias class='cd /home/kewbish/EVB/;vim -o "$(fd atsc113 engl110 fren101 math104 phys119 --type directory | fzf)"'
-alias atsc113='cd /home/kewbish/EVB/atsc113/;vim -o "$(fzf)"'
-alias engl110='cd /home/kewbish/EVB/engl110/;vim -o "$(fzf)"'
-alias fren101='cd /home/kewbish/EVB/fren101/;vim -o "$(fzf)"'
-alias math104='cd /home/kewbish/EVB/math104/;vim -o "$(fzf)"'
-alias phys119='cd /home/kewbish/EVB/phys119/;vim -o "$(fzf)"'
+# alias fso-cp="\cp -r ./ /home/kewbish/Downloads/dev/kewbish-fso/"
+alias biol121='cd /home/kewbish/EVB/biol121/;vim -o "$(fzf)"'
+alias cpsc210='cd /home/kewbish/EVB/cpsc210/;vim -o "$(fzf)"'
+alias fren201='cd /home/kewbish/EVB/fren201/;vim -o "$(fzf)"'
+alias math200='cd /home/kewbish/EVB/math200/;vim -o "$(fzf)"'
+alias math221='cd /home/kewbish/EVB/math221/;vim -o "$(fzf)"'
+alias yours='cd /home/kewbish/EVB/yours/;vim -o "$(fzf)"'
+alias readings='cd /home/kewbish/EVB/readings/;vim -o "$(fzf)"'
+# alias fleet='cd /home/kewbish/EVB/tmp/;vim -o "$(fzf)"'
+alias :q=exit
+alias ytdl='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --write-sub --retries 10'
+alias subrip='for i in *.vtt; do ffmpeg -i "$i" -c:s subrip "${i%.*}.srt"; done'
+# alias clcsync='calcurse-caldav --init=keep-remote --authcode "4/0AX4XfWhLCBDWLnlwyZY5sYGnrleVkyETeoIDPgRtFFwIjDIpggsFedm8nH8MtlsuHutd2g"'
+# alias repl='cd /home/kewbish/Downloads/dev/replit'
+# alias replit='cd /home/kewbish/EVB/replit/;vim -o "$(fzf)"'
+alias tmrwtodo='python /home/kewbish/Downloads/dev/tmp/tmrw_todo.py'
+alias 7='dijo'
+alias ptoi='pdftoppm -png'
+alias 221mount='sshfs kewbish@remote.students.cs.ubc.ca:/home/k/kewbish/cpsc221/ /home/kewbish/Downloads/education/cpsc221/remote'
+alias 213mount='sshfs kewbish@remote.students.cs.ubc.ca:/home/k/kewbish/cpsc213/ /home/kewbish/Downloads/education/cpsc213/remote'
 
 shopt -s direxpand
 
@@ -176,3 +189,30 @@ xtog() {
     exit 0
 }
 
+battog() {
+    if [[ "$(cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode)" == 1 ]]; then
+        sudo sh -c "echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+    else
+        sudo sh -c "echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+    fi
+}
+alias batstate='cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+
+cpmkrn() {
+    name=$(echo $1 | sed "s/.cpp/.out/")
+    g++ -std=c++11 -O2 -Wall $1 -o $name
+    ./$name
+}
+
+ptoineg () {
+    infile=$1
+    outprec=$2
+    pdftoppm -png $infile $outprec
+    for f in $outprec*.png ; do convert -negate $f $f ; done
+}
+
+export PATH=/home/kewbish/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/kewbish/.npm-global/bin:/home/kewbish/.npm-global/lib/node_modules/yarn/bin/:/usr/lib/ruby/2.7.0/:/home/kewbish/.fly/bin
+
+source /etc/profile.d/google-cloud-sdk.sh
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

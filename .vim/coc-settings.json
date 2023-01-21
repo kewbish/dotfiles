@@ -1,4 +1,17 @@
 {
-    "suggest.floatEnable": false,
-    "python.jediEnabled": false
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "scss",
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "json",
+    "graphql",
+    "svelte"
+  ],
+  "svelte.enable-ts-plugin": true,
+  "cSpell.userWords": ["forex"],
+  "suggest.noselect": true
 }
