@@ -146,30 +146,30 @@ export dev=/home/kewbish/Downloads/dev
 export pers=/home/kewbish/Downloads/personal
 export edu=/home/kewbish/Downloads/education
 
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='-m --border --height 40%'
 
 alias tock='python /home/kewbish/Downloads/dev/pers/tock/tock.py'
-alias clc='calcurse'
-alias evb='cd /home/kewbish/EVB/;vim -o "$(rg --files -g '!archive/' $evb | fzf)"'
+alias clc='EDITOR=nvim calcurse'
+alias evb='cd /home/kewbish/EVB/;nvim -o "$(rg --files -g '!archive/' $evb | fzf)"'
 alias latexmk='latexmk -pvc -pdf -interaction=nonstopmode'
 # alias fso-cp="\cp -r ./ /home/kewbish/Downloads/dev/kewbish-fso/"
-alias biol121='cd /home/kewbish/EVB/biol121/;vim -o "$(fzf)"'
-alias cpsc210='cd /home/kewbish/EVB/cpsc210/;vim -o "$(fzf)"'
-alias fren201='cd /home/kewbish/EVB/fren201/;vim -o "$(fzf)"'
-alias math200='cd /home/kewbish/EVB/math200/;vim -o "$(fzf)"'
-alias math221='cd /home/kewbish/EVB/math221/;vim -o "$(fzf)"'
-alias yours='cd /home/kewbish/EVB/yours/;vim -o "$(fzf)"'
-alias readings='cd /home/kewbish/EVB/readings/;vim -o "$(fzf)"'
-# alias fleet='cd /home/kewbish/EVB/tmp/;vim -o "$(fzf)"'
+alias cpsc213='cd /home/kewbish/EVB/cpsc213/;nvim -o "$(fzf)"'
+alias cpsc221='cd /home/kewbish/EVB/cpsc221/;nvim -o "$(fzf)"'
+alias fren202='cd /home/kewbish/EVB/fren202/;nvim -o "$(fzf)"'
+alias cogs200='cd /home/kewbish/EVB/cogs200/;nvim -o "$(fzf)"'
+alias cpsc448='cd /home/kewbish/EVB/cpsc448/;nvim -o "$(fzf)"'
+alias yours='cd /home/kewbish/EVB/yours/;nvim -o "$(fzf)"'
+alias readings='cd /home/kewbish/EVB/readings/;nvim -o "$(fzf)"'
+# alias fleet='cd /home/kewbish/EVB/tmp/;nvim -o "$(fzf)"'
 alias :q=exit
 alias ytdl='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --write-sub --retries 10'
 alias subrip='for i in *.vtt; do ffmpeg -i "$i" -c:s subrip "${i%.*}.srt"; done'
 # alias clcsync='calcurse-caldav --init=keep-remote --authcode "4/0AX4XfWhLCBDWLnlwyZY5sYGnrleVkyETeoIDPgRtFFwIjDIpggsFedm8nH8MtlsuHutd2g"'
 # alias repl='cd /home/kewbish/Downloads/dev/replit'
-# alias replit='cd /home/kewbish/EVB/replit/;vim -o "$(fzf)"'
+# alias replit='cd /home/kewbish/EVB/replit/;nvim -o "$(fzf)"'
 alias tmrwtodo='python /home/kewbish/Downloads/dev/tmp/tmrw_todo.py'
 alias 7='dijo'
 alias ptoi='pdftoppm -png'
@@ -211,8 +211,17 @@ ptoineg () {
     for f in $outprec*.png ; do convert -negate $f $f ; done
 }
 
-export PATH=/home/kewbish/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/kewbish/.npm-global/bin:/home/kewbish/.npm-global/lib/node_modules/yarn/bin/:/usr/lib/ruby/2.7.0/:/home/kewbish/.fly/bin
+export PATH=/home/kewbish/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/kewbish/.npm-global/bin:/home/kewbish/.npm-global/lib/node_modules/yarn/bin/:/usr/lib/ruby/2.7.0/:/home/kewbish/.fly/bin:/home/kewbish/.jdks/corretto-11.0.16.1/bin:/home/kewbish/go/bin
+
 
 source /etc/profile.d/google-cloud-sdk.sh
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+alias vim=nvim
+
+export GOPATH=/home/kewbish/go
+
+if [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+fi
