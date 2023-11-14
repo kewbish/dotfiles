@@ -1,9 +1,10 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["*"],
-    "svelte.enable-ts-plugin": true,
-    "cSpell.userWords": ["forex"],
-    "suggest.noselect": true,
-    "go.goplsOptions": {
-        "gofumpt": true
-    }
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "svelte.enable-ts-plugin": true,
+  "cSpell.userWords": ["forex"],
+  "suggest.noselect": true,
+  "go.goplsOptions": {
+    "gofumpt": true
+  },
+  "python.formatting.provider": "black"
 }

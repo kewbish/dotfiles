@@ -10,7 +10,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'psf/black'
 Plug 'antoinemadec/coc-fzf'
 Plug 'rhysd/vim-clang-format'
 " Plug 'github/copilot.vim'
@@ -57,6 +56,7 @@ inoremap <silent><expr> <Tab>
 inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() : "\<C-g>u\<CR>"
 
 nnoremap <leader>te :let $VIM_DIR=expand('%:p:h')<CR>:tabnew <bar> below new <bar> term<CR><C-w>_icd $VIM_DIR<CR>clear<CR>
+nnoremap <leader>gg :GFiles<CR>
 nnoremap <leader>go :Goyo<CR>
 nnoremap <leader>qa :qa!<CR>
 nnoremap <leader>cpa :let @+ = expand("%:p")<CR>
@@ -67,7 +67,7 @@ let g:coc_node_path = '/home/kewbish/n/bin/node'
 
 let g:black_linelength=120
 let g:black_quiet=1
-autocmd BufWritePre *.py Black
+" autocmd BufWritePre *.py Black
 " autocmd BufWritePre *.js,*.ts,*.tsx,*.jsx,*.html,*.css Prettier
 autocmd FileType cpp ClangFormatAutoEnable
 autocmd BufWritePre *cpp execute ':ClangFormat'
@@ -86,15 +86,13 @@ command! -bang -nargs=* Sevb
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always -i ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
 " \ call fzf#vim#grep("rg -g '!archive/' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
 autocmd FileType markdown setlocal noexpandtab
-nnoremap <leader>ln va)y:exe ":Sevb " . substitute(substitute(getreg('"'), "\(#:", "", "/g"), "\)", "", "/g")<CR>
+nnoremap <leader>ln va)y:exe ":Sevb " . substitute(substitute(getreg('"'), "\(#:", "", "/g"), "\)", "", "/g")<CR><CR>
 nnoremap <leader>st :Sevb \(#:<CR>
 nnoremap <leader>se :Sevb<CR>
 nnoremap <leader>sd :Sevb \(#: TODO\)<CR>
 nnoremap <leader>sf :Files /home/kewbish/EVB/<CR>
-nnoremap <expr> <leader>nq ':vimgrep /\[l' .nr2char(getchar()). '\]/ %<CR>'
-nnoremap <leader>ll :s/\[l\d\]/\[l1\]/ <CR>
-nnoremap <leader>rl :s/\[l\zs\d/\=submatch(0)+1/ <CR>
 command G GFiles
+vnoremap <leader>cl c(#: <C-r>")<C-c>
 
 " imap <silent><script><expr> <C-P> copilot#Accept("\<CR>")
 " nnoremap <leader>cpl :Copilot<CR>
@@ -109,6 +107,8 @@ augroup notes
     autocmd FileType markdown syntax match YKConceal /\v(\(\#G\s)/ conceal
     autocmd FileType markdown syntax match YKConceal /\v(\(\#G\s(.*))@<=\)/ conceal
     autocmd FileType markdown syntax match YKExample /\v(\(\#G\s)@<=([^\)]*)\)@=/
+    autocmd FileType markdown syntax match PurpleHighlight /\v\(\#:(.*)\)/
+    autocmd FileType markdown hi PurpleHighlight ctermfg=189 guifg=#b3a0de	
     autocmd FileType markdown hi CorrodeMyNote ctermfg=140 guifg=#af87d7	
     autocmd FileType markdown hi CorrodeClassmateNote ctermfg=152 guifg=#afd7d7
     autocmd FileType markdown hi CorrodeQuestion ctermfg=203 guifg=#ff5f5f
@@ -119,8 +119,6 @@ augroup END
 inoremap <leader>mn (MN)
 inoremap <leader>cn (CN)
 autocmd FileType markdown let b:surround_187 = "« \r »"
-vnoremap <leader>g c(#G <C-r>")<C-c>
-
 
 autocmd FileType markdown nmap <buffer><silent> <C-i> :call mdip#MarkdownClipboardImage()<CR>
 if expand('%:h') == "/home/kewbish/EVB/yours"
@@ -136,3 +134,4 @@ tnoremap <C-w>N <C-\><C-n>
 tnoremap <C-w>k <C-\><C-n><C-w>k
 let g:python3_host_prog = '/usr/bin/python'
 
+au BufRead,BufNewFile *.ys setfiletype asm
