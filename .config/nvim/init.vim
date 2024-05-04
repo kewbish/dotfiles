@@ -12,10 +12,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'rhysd/vim-clang-format'
-" Plug 'github/copilot.vim'
-Plug '~/Downloads/dev/chasm-213'
-" Plug 'jalvesaq/zotcite'
-Plug 'img-paste-devs/img-paste.vim'
 
 call plug#end()
 
@@ -33,6 +29,9 @@ set autoindent
 set autochdir
 noremap j gj
 noremap k gk
+noremap zj j 
+noremap zk k 
+set relativenumber
 inoremap <C-h> <C-w>
 set t_ut=
 set incsearch
@@ -62,6 +61,7 @@ nnoremap <leader>qa :qa!<CR>
 nnoremap <leader>cpa :let @+ = expand("%:p")<CR>
 nnoremap <silent>gd <Plug>(coc-definition)
 nnoremap <silent>gD <Plug>(coc-references)
+nnoremap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 let g:coc_node_path = '/home/kewbish/n/bin/node'
 
@@ -80,13 +80,11 @@ augroup END
 function! s:insert_fzf_link(lines)
     execute "normal! va]\<Esc>a(/home/kewbish/EVB/" . a:lines[0] . ")\<Esc>"
 endfunction
-let g:fzf_action = {
-  \ 'return': 'vsplit', 'ctrl-r': function("s:insert_fzf_link")}
 command! -bang -nargs=* Sevb 
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always -i ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
 " \ call fzf#vim#grep("rg -g '!archive/' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': '/home/kewbish/EVB/'}, <bang>0)
 autocmd FileType markdown setlocal noexpandtab
-nnoremap <leader>ln va)y:exe ":Sevb " . substitute(substitute(getreg('"'), "\(#:", "", "/g"), "\)", "", "/g")<CR><CR>
+nnoremap <leader>ln va)y:exe ":Sevb " . substitute(substitute(getreg('"'), "\(#:", "", "/g"), "\)", "", "/g")<CR>
 nnoremap <leader>st :Sevb \(#:<CR>
 nnoremap <leader>se :Sevb<CR>
 nnoremap <leader>sd :Sevb \(#: TODO\)<CR>
@@ -135,3 +133,16 @@ tnoremap <C-w>k <C-\><C-n><C-w>k
 let g:python3_host_prog = '/usr/bin/python'
 
 au BufRead,BufNewFile *.ys setfiletype asm
+
+augroup fzfAction
+    autocmd! BufEnter * call CheckDir()
+augroup END
+function! CheckDir()
+  if isdirectory(expand('%:p'))
+      let g:fzf_action = {
+          \ 'return': 'e', 'ctrl-r': function("s:insert_fzf_link")}
+  else
+      let g:fzf_action = {
+          \ 'return': 'vsplit', 'ctrl-r': function("s:insert_fzf_link")}
+  endif
+endfunction
