@@ -19,9 +19,11 @@ endif
 fun! <sid>hi(group, fg, bg, attr, sp)
   if !empty(a:fg)
     exec "hi " . a:group . " guifg=" . a:fg.gui . " ctermfg=" . (g:codedark_term256 ? a:fg.cterm256 : a:fg.cterm)
+    " exec "hi " . a:group . " guifg=" . a:fg.gui . " ctermfg=" . a:fg.cterm
   endif
   if !empty(a:bg)
     exec "hi " . a:group . " guibg=" . a:bg.gui . " ctermbg=" . (g:codedark_term256 ? a:bg.cterm256 : a:bg.cterm)
+    " exec "hi " . a:group . " guibg=" . a:bg.gui . " ctermbg=" . a:bg.cterm
   endif
   if a:attr != ""
     exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
@@ -38,7 +40,7 @@ endfun
 " Terminal colors (base16):
 let s:cterm00 = "00"
 let s:cterm03 = "08"
-let s:cterm05 = "07"
+let s:cterm05 = "15"
 let s:cterm07 = "15"
 let s:cterm08 = "01"
 let s:cterm0A = "03"
@@ -54,12 +56,12 @@ if exists('base16colorspace') && base16colorspace == "256"
   let s:cterm09 = "16"
   let s:cterm0F = "17"
 else
-  let s:cterm01 = "00"
-  let s:cterm02 = "08"
-  let s:cterm04 = "07"
-  let s:cterm06 = "07"
-  let s:cterm09 = "06"
-  let s:cterm0F = "03"
+   let s:cterm01 = "00"
+   let s:cterm02 = "08"
+   let s:cterm04 = "07"
+   let s:cterm06 = "07"
+   let s:cterm09 = "06"
+   let s:cterm0F = "03"
 endif
 
 " General appearance colors:
@@ -104,26 +106,26 @@ let s:cdSearch = {'gui': '#264F78', 'cterm': s:cterm03, 'cterm256': '244'}
 " Syntax colors:
 
 if !exists("g:codedark_conservative")
-    let g:codedark_conservative=0
+    let g:codedark_conservative=1 " default to 'conservative'
 endif
 
 let s:cdGray = {'gui': '#808080', 'cterm': s:cterm04, 'cterm256': '08'}
-let s:cdViolet = {'gui': '#646695', 'cterm': s:cterm04, 'cterm256': '59'}
-let s:cdBlue = {'gui': '#569CD6', 'cterm': s:cterm0D, 'cterm256': '254'}
-let s:cdDarkBlue = {'gui': '#223E55', 'cterm': s:cterm0D, 'cterm256': '249'}
-let s:cdLightBlue = {'gui': '#9CDCFE', 'cterm': s:cterm0C, 'cterm256': '253'}
+let s:cdViolet = {'gui': '#5f5f5f', 'cterm': s:cterm04, 'cterm256': '59'}
+let s:cdBlue = {'gui': '#e4e4e4', 'cterm': s:cterm0D, 'cterm256': '254'}
+let s:cdDarkBlue = {'gui': '#b2b2b2', 'cterm': s:cterm0D, 'cterm256': '249'}
+let s:cdLightBlue = {'gui': '#dadada', 'cterm': s:cterm0C, 'cterm256': '253'}
 if g:codedark_conservative | let s:cdLightBlue = s:cdFront | endif
-let s:cdGreen = {'gui': '#6A9955', 'cterm': s:cterm0B, 'cterm256': '102'}
-let s:cdBlueGreen = {'gui': '#4EC9B0', 'cterm': s:cterm0F, 'cterm256': '252'}
-let s:cdLightGreen = {'gui': '#B5CEA8', 'cterm': s:cterm09, 'cterm256': '251'}
-let s:cdRed = {'gui': '#F44747', 'cterm': s:cterm08, 'cterm256': '252'}
-let s:cdOrange = {'gui': '#CE9178', 'cterm': s:cterm0F, 'cterm256': '248'}
-let s:cdLightRed = {'gui': '#D16969', 'cterm': s:cterm08, 'cterm256': '246'}
+let s:cdGreen = {'gui': '#878787', 'cterm': s:cterm0B, 'cterm256': '102'}
+let s:cdBlueGreen = {'gui': '#d0d0d0', 'cterm': s:cterm0F, 'cterm256': '252'}
+let s:cdLightGreen = {'gui': '#c6c6c6', 'cterm': s:cterm09, 'cterm256': '251'}
+let s:cdRed = {'gui': '#d0d0d0', 'cterm': s:cterm08, 'cterm256': '252'}
+let s:cdOrange = {'gui': '#a8a8a8', 'cterm': s:cterm0F, 'cterm256': '248'}
+let s:cdLightRed = {'gui': '#949494', 'cterm': s:cterm08, 'cterm256': '246'}
 if g:codedark_conservative | let s:cdLightRed = s:cdOrange | endif
-let s:cdYellowOrange = {'gui': '#D7BA7D', 'cterm': s:cterm0A, 'cterm256': '248'}
-let s:cdYellow = {'gui': '#DCDCAA', 'cterm': s:cterm0A, 'cterm256': '248'}
+let s:cdYellowOrange = {'gui': '#a8a8a8', 'cterm': s:cterm0A, 'cterm256': '248'}
+let s:cdYellow = {'gui': '#a8a8a8', 'cterm': s:cterm0A, 'cterm256': '248'}
 if g:codedark_conservative | let s:cdYellow = s:cdFront | endif
-let s:cdPink = {'gui': '#C586C0', 'cterm': s:cterm0E, 'cterm256': '248'}
+let s:cdPink = {'gui': '#a8a8a8', 'cterm': s:cterm0E, 'cterm256': '248'}
 if g:codedark_conservative | let s:cdPink = s:cdBlue | endif
 
 " Vim editor colors
